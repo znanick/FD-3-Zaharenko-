@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>FilterStrs</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="FilterStrs.js"></script>
+    <link rel="stylesheet" type="text/css" href="FilterStrs.css" />
+
+    <script>
+      var strsArr = [
+        "developer",
+        "frontend",
+        "css",
+        "londonisthecapitalofgreatbritain",
+        "react.js",
+      ];
+
+      ReactDOM.render(
+        React.createElement(FilterStrs, {
+          strs: strsArr,
+        }),
+        document.getElementById("container")
+      );
+    </script>
+  </body>
+</html>
