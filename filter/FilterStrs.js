@@ -39,7 +39,7 @@ var FilterStrs = React.createClass({
 
     return React.DOM.div(
       { className: "Filter" },
-      React.DOM.input({ type:'checkbox', onClick:this.sortStr, value:this.state.sortState}),
+      React.DOM.input({ type:'checkbox', onClick:this.sortStr, checked:this.state.sortState}),
       React.DOM.input({ type:'text', onChange:this.filterStr, value:this.state.filterState}),
       React.DOM.button({  onClick:this.buttonReset}, "Сброс"),
       React.DOM.div ({className:'textArea'}, this.state.strsView)
