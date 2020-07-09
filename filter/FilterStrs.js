@@ -7,7 +7,7 @@ var FilterStrs = React.createClass({
     return {
       sortState: false,
       filterState: "",
-      strsView: [],
+      strsView: this.props.strs,
     };
   },
 
@@ -31,11 +31,11 @@ var FilterStrs = React.createClass({
   }, 
 
   buttonReset: function(){
-    this.setState({sortState:false, filterState:''})
+    this.setState({sortState:false, filterState:'', strsView: this.props.strs})
   },
 
   render: function () {
-    this.filterList() 
+    
 
     return React.DOM.div(
       { className: "Filter" },
