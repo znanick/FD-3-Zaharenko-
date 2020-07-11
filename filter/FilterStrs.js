@@ -19,34 +19,47 @@ var FilterStrs = React.createClass({
     if (this.state.sortState) {
       str.sort();
     }
-    this.setState({ strsView: str },);
+    this.setState({ strsView: str });
   },
 
-  sortStr:function(eo){
-    this.setState({sortState: eo.target.checked}, this.filterList)
+  sortStr: function (eo) {
+    this.setState({ sortState: eo.target.checked }, this.filterList);
   },
 
-  filterStr: function(eo){
-    this.setState({filterState: eo.target.value}, this.filterList)
-  }, 
+  filterStr: function (eo) {
+    this.setState({ filterState: eo.target.value }, this.filterList);
+  },
 
-  buttonReset: function(){
-    this.setState({sortState:false, filterState:'', strsView: this.props.strs})
+  buttonReset: function () {
+    this.setState({
+      sortState: false,
+      filterState: "",
+      strsView: this.props.strs,
+    });
   },
 
   render: function () {
-    
     var text = [];
-    this.state.strsView.forEach(elem => {
-      text.push(React.DOM.div({className:'textElem'}, elem))
+    this.state.strsView.forEach((elem) => {
+      var textElem = React.DOM.div({ className: "textElem", key: elem }, elem);
+      text.push(textElem);
+      
     });
 
     return React.DOM.div(
       { className: "Filter" },
-      React.DOM.input({ type:'checkbox', onClick:this.sortStr, checked:this.state.sortState}),
-      React.DOM.input({ type:'text', onChange:this.filterStr, value:this.state.filterState}),
-      React.DOM.button({  onClick:this.buttonReset}, "Сброс"),
-      React.DOM.div ({className:'textArea'}, text)
+      React.DOM.input({
+        type: "checkbox",
+        onClick: this.sortStr,
+        checked: this.state.sortState,
+      }),
+      React.DOM.input({
+        type: "text",
+        onChange: this.filterStr,
+        value: this.state.filterState,
+      }),
+      React.DOM.button({ onClick: this.buttonReset }, "Сброс"),
+      React.DOM.div({ className: "textArea" }, text)
     );
   },
 });
