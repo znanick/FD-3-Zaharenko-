@@ -36,13 +36,17 @@ var FilterStrs = React.createClass({
 
   render: function () {
     
+    var text = [];
+    this.state.strsView.forEach(elem => {
+      text.push(React.DOM.div({className:'textElem'}, elem))
+    });
 
     return React.DOM.div(
       { className: "Filter" },
       React.DOM.input({ type:'checkbox', onClick:this.sortStr, checked:this.state.sortState}),
       React.DOM.input({ type:'text', onChange:this.filterStr, value:this.state.filterState}),
       React.DOM.button({  onClick:this.buttonReset}, "Сброс"),
-      React.DOM.div ({className:'textArea'}, this.state.strsView)
+      React.DOM.div ({className:'textArea'}, text)
     );
   },
 });
