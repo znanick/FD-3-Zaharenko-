@@ -5,19 +5,30 @@ var Ishop = React.createClass({
   getInitialState: function () {
     return {
       selectedProductCode: null,
+      catalog: this.props.catalog,
     };
   },
 
-  selectProuduct: function () {},
+  selectProuduct: function (code) {
+    this.setState({ selectedProductCode: code });
+  },
+
+  deleteProduct: function (item) {
+    if (confirm("Вы уверены?")) {
+      var newCatalog = this.state.catalog.filter((el) => el.code != item);
+      this.setState({ catalog: newCatalog });
+    }
+  },
 
   render: function () {
     var tableCode = [];
-    for (var a = 0; a < this.props.catalog.length; a++) {
+    for (var a = 0; a < this.state.catalog.length; a++) {
       var productComponent = React.createElement(Iprouduct, {
-        selectedProductCode: this.props.selectedProductCode,
+        selectedProductCode: this.state.selectedProductCode,
         cbselectProuduct: this.selectProuduct,
-        catalog: this.props.catalog[a],
-        key: this.props.catalog[a].code,
+        cbdeleteProduct: this.deleteProduct,
+        catalog: this.state.catalog[a],
+        key: this.state.catalog[a].code,
       });
       tableCode.push(productComponent);
     }
