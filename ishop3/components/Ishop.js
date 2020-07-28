@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Ishop.css";
 
-import Iprouduct from "./Iprouduct";
+import Iproduct from "./Iproduct";
 
 class Ishop extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class Ishop extends React.Component {
     var tableCode = [];
     for (var a = 0; a < this.state.catalog.length; a++) {
       var productComponent = (
-        <Iprouduct
+        <Iproduct
           selectedProductCode={this.state.selectedProductCode}
           cbselectProuduct={this.selectProuduct}
           cbdeleteProduct={this.deleteProduct}
@@ -42,8 +42,9 @@ class Ishop extends React.Component {
         <table className="catalogTable">
           <tbody>{tableCode}</tbody>
         </table>
+        <button onClick={this.newProduct}>New product</button>
       </div>
-    );
+    );  
   }
 }
 

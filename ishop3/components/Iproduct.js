@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Iproduct.css";
 
-class Iprouduct extends React.Component {
+class Iproduct extends React.Component {
   state = {};
 
   select = (EO) => {
@@ -20,29 +20,30 @@ class Iprouduct extends React.Component {
 
   render() {
     var product = this.props.catalog;
-
+    var trColor =
+      this.props.selectedProductCode == product.code ? "yellow" : "white";
     return (
-      <tr
-        key={product.code}
-        className={"product"}
-        onClick={this.select}
-        style={
-          (backgroundColor =
-            this.props.selectedProductCode == product.code ? "yellow" : "white")
-        }
-      >
-        <td className={"productName"}>{product.name} </td>
-        <td className={"productPrice"}>{product.price} </td>
-        <td className={"productImg"}>
-          <img src={product.imgUrl} width={100} />
-        </td>
-        <td className={"productAmount"}>{product.amount} </td>
-        <td className={"delete"}>
-          <button onClick={this.delete}>"Delete"</button>
-        </td>
-      </tr>
+      <React.Fragment>
+        <tr
+          key={product.code}
+          className={"product"}
+          onClick={this.select}
+          style={{ backgroundColor: trColor }}
+        >
+          <td className={"productName"}>{product.name} </td>
+          <td className={"productPrice"}>{product.price} </td>
+          <td className={"productImg"}>
+            <img src={product.imgUrl} width={100} />
+          </td>
+          <td className={"productAmount"}>{product.amount} </td>
+          <td className={"delete"}>
+            <button onClick={this.delete}>Delete</button>
+            <button onClick={this.edit}>Edit</button>
+          </td>
+        </tr>
+      </React.Fragment>
     );
   }
 }
 
-export default Iprouduct;
+export default Iproduct;
