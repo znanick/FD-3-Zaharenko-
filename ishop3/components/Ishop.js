@@ -9,6 +9,7 @@ class Ishop extends React.Component {
   state = {
     selectedProductCode: null,
     catalog: this.props.catalog,
+    cardMode: 0,  //0 - nothing  1 - view  2 - edit
   };
 
   selectProuduct = (code) => {
@@ -43,6 +44,7 @@ class Ishop extends React.Component {
           <tbody>{tableCode}</tbody>
         </table>
         <button onClick={this.newProduct}>New product</button>
+        {}
       </div>
     );  
   }
