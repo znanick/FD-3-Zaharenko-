@@ -545,7 +545,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var withRainbowFrame = function withRainbowFrame(colors) {
   return function (Component) {
     return function (props) {
-      var code = undefined.props.children;
+      var code = _react2.default.createElement(Component, props);
       colors.forEach(function (color) {
         code = _react2.default.createElement(
           "div",
@@ -588,6 +588,14 @@ var _Rainbow2 = _interopRequireDefault(_Rainbow);
 var _withRainbowFrame = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_reactDom2.default.render(_react2.default.createElement(
+  _Rainbow2.default,
+  { caption1: "\u043E\u0434\u043D\u0430\u0436\u0434\u044B", caption2: "\u043F\u043E\u0440\u0443", cbPressed: function cbPressed(num) {
+      return alert(num);
+    } },
+  "\u0432 \u0441\u0442\u0443\u0434\u0451\u043D\u0443\u044E \u0437\u0438\u043C\u043D\u044E\u044E"
+), document.getElementById("container"));
 
 var colors = ["red", "orange", "yellow", "green", "#00BFFF", "blue", "purple"];
 var FramedFragment = (0, _withRainbowFrame.withRainbowFrame)(colors)(_Rainbow2.default);
@@ -29243,7 +29251,22 @@ var Rainbow = function (_React$Component) {
   _createClass(Rainbow, [{
     key: "render",
     value: function render() {
-      return _react2.default.createElement("div", null);
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "button",
+          null,
+          this.props.caption1
+        ),
+        " ",
+        this.props.children,
+        _react2.default.createElement(
+          "button",
+          null,
+          this.props.caption2
+        )
+      );
     }
   }]);
 
