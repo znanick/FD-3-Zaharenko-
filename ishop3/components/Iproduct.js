@@ -7,19 +7,25 @@ class Iproduct extends React.Component {
   state = {};
 
   select = (EO) => {
-    if (this.props.selectedProductCode != this.props.catalog.code) {
-      this.props.cbselectProuduct(this.props.catalog.code);
-    } else {
-      this.props.cbselectProuduct(null);
+    if (!this.props.isFormEdit) {
+      if (this.props.selectedProductCode != this.props.item.code) {
+        this.props.cbselectProuduct(this.props.item.code);
+      } else {
+        this.props.cbselectProuduct(null);
+      }
     }
   };
 
   delete = () => {
-    this.props.cbdeleteProduct(this.props.catalog.code);
+    this.props.cbdeleteProduct(this.props.item.code);
+  };
+
+  edit = () => {
+    this.props.cbeditProduct(this.props.item.code);
   };
 
   render() {
-    var product = this.props.catalog;
+    var product = this.props.item;
     var trColor =
       this.props.selectedProductCode == product.code ? "yellow" : "white";
     return (
@@ -27,18 +33,39 @@ class Iproduct extends React.Component {
         <tr
           key={product.code}
           className={"product"}
-          onClick={this.select}
           style={{ backgroundColor: trColor }}
         >
-          <td className={"productName"}>{product.name} </td>
-          <td className={"productPrice"}>{product.price} </td>
-          <td className={"productImg"}>
-            <img src={product.imgUrl} width={100} />
+          <td onClick={this.select} className={"productName"}>
+            {product.name}{" "}
           </td>
-          <td className={"productAmount"}>{product.amount} </td>
-          <td className={"delete"}>
-            <button onClick={this.delete}>Delete</button>
-            <button onClick={this.edit}>Edit</button>
+          <td onClick={this.select} className={"productPrice"}>
+            {product.price}{" "}
+          </td>
+          <td onClick={this.select} className={"productImg"}>
+            <p>{product.description}</p>
+          </td>
+          <td onClick={this.select} className={"productAmount"}>
+            {product.amount}{" "}
+          </td>
+          <td className={"buttonBlock"}>
+            <button
+              onClick={this.delete}
+              disabled={
+                this.props.cardMode != 0 && this.props.cardMode != 1
+                  ? true
+                  : false
+              }
+            >
+              Delete
+            </button>
+            <button
+              onClick={this.edit}
+              disabled={
+                this.props.cardMode == 3 || this.props.isFormEdit ? true : false
+              }
+            >
+              Edit
+            </button>
           </td>
         </tr>
       </React.Fragment>

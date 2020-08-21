@@ -1,0 +1,11 @@
+span,
+input {
+  margin: 2px;
+}
+
+.errTxt {
+  font-size: 10px;
+  color: red;
+ 
+  padding: 3px;
+}
