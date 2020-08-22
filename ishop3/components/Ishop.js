@@ -117,7 +117,6 @@ class Ishop extends React.Component {
         if (this.state.selectedProductCode == this.state.catalog[a].code) {
           var cardComponent = (
             <Card
-              catalog={this.state.catalog}
               selectedProductCode={this.state.selectedProductCode}
               cardMode={this.state.cardMode}
               item={this.state.catalog[a]}

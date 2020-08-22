@@ -5,7 +5,6 @@ import "./Card.css";
 
 class Card extends React.Component {
   state = {
-    catalog: this.props.catalog,
     item: this.props.item,
     name: this.props.item.name,
     price: parseFloat(this.props.item.price),
@@ -102,6 +101,18 @@ class Card extends React.Component {
     this.props.cbAddItem(newItem);
   };
 
+  removingZeros = (num) => {
+    if (num == "price") {
+      var newNum = this.state.price;
+      newNum = newNum.replace(/^0+/, "");
+      this.setState({ price: newNum });
+    } else if (num == "amount") {
+      var newNum = this.state.amount;
+      newNum = newNum.replace(/^0+/, "");
+      this.setState({ amount: newNum });
+    }
+  };
+
   render() {
     // view
     var product = this.state.item;
@@ -158,7 +169,10 @@ class Card extends React.Component {
               this.setState({ price: EO.target.value });
               this.cbFormEdit();
             }}
-            onBlur={this.validPrice}
+            onBlur={(EO) => {
+              this.validPrice(EO);
+              this.removingZeros("price");
+            }}
           ></input>
           <span className="errTxt">{this.state.notValidPriceTxt}</span>
           <br />
@@ -182,7 +196,10 @@ class Card extends React.Component {
               this.setState({ amount: EO.target.value });
               this.cbFormEdit();
             }}
-            onBlur={this.validAmount}
+            onBlur={(EO) => {
+              this.validAmount(EO);
+              this.removingZeros("amount");
+            }}
           ></input>
           <span className="errTxt">{this.state.notValidAmountTxt}</span>
           <br />
