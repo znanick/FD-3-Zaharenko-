@@ -3,24 +3,28 @@
     "surname": "Захаренко",
     "name": "Никита",
     "familyName": "Александрович",
-    "balance": "200"
+    "balance": "200",
+    "key": "0"
   },
   {
     "surname": "Крупа",
     "name": "Екатерина",
     "familyName": "Петровна",
-    "balance": "-120"
+    "balance": "-120",
+    "key": "1"
   },
   {
     "surname": "Локтев",
     "name": "Алексей",
     "familyName": "Владимирович",
-    "balance": "212"
+    "balance": "212",
+    "key": "2"
   },
   {
     "surname": "Реактович",
     "name": "Ангулар",
     "familyName": "Нодович",
-    "balance": "154"
+    "balance": "154",
+    "key": "3"
   }
 ]
