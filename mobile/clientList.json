@@ -1,0 +1,26 @@
+[
+  {
+    "surname": "Захаренко",
+    "name": "Никита",
+    "familyName": "Александрович",
+    "balance": "200"
+  },
+  {
+    "surname": "Крупа",
+    "name": "Екатерина",
+    "familyName": "Петровна",
+    "balance": "-120"
+  },
+  {
+    "surname": "Локтев",
+    "name": "Алексей",
+    "familyName": "Владимирович",
+    "balance": "212"
+  },
+  {
+    "surname": "Реактович",
+    "name": "Ангулар",
+    "familyName": "Нодович",
+    "balance": "154"
+  }
+]
