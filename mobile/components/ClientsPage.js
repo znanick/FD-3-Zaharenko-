@@ -39,7 +39,14 @@ class ClientsPage extends React.PureComponent {
     this.setState({ cardMode: 1 });
   };
 
-  removeClient = () => {};
+  removeClient = (clientKey) => {
+    var oldCatalog = Immutable.Map(this.state.clientsCatalog);
+    
+    if (confirm("Вы уверены?")) {
+      var newCatalog = oldCatalog.filter((el) => el.key != clientKey);
+      this.setState({ clientsCatalog: newCatalog });
+    }
+  };
 
   editClient = () => {};
 

@@ -5,30 +5,34 @@ import { EventEmitter } from "events";
 
 import { buttonClick } from "./events";
 
+import "./Card.css";
+
 class Card extends React.PureComponent {
   state = {
     clientsCatalog: this.props.clientsCatalog,
   };
 
   render() {
-    console.log('Card render')
-    if (this.props.cardMode == 1) {
-      //add new client
+    console.log("Card render");
 
-      var cardCode = (
-        <div>
-          <span>Фамилия</span>
-          <input></input>
-          <span>Имя</span>
-          <input></input>
-          <span>Отчество</span>
-          <input></input>
-          <span>Баланс</span>
-          <input></input>
-        </div>
-      );
-    }
-    return { cardCode };
+    return (
+      <div>
+        <span>Фамилия</span>
+        <input></input>
+        <br />
+        <span>Имя</span>
+        <input></input>
+        <br />
+        <span>Отчество</span>
+        <input></input>
+        <br />
+        <span>Баланс</span>
+        <input></input>
+        <br />
+        <button>Добавить</button>
+        <button>Отмена</button>
+      </div>
+    );
   }
 }
 
