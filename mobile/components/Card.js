@@ -31,9 +31,16 @@ class Card extends React.PureComponent {
     buttonClick.emit("EButtonSave", newClientInfo);
   };
 
+  componentDidMount = () => {
+    this.surnameRef.current.value = this.state.clientsCatalog[this.props.clientId].surname;
+    this.nameRef.current.value = this.state.clientsCatalog[this.props.clientId].name;
+    this.familyNameRef.current.value = this.state.clientsCatalog[this.props.clientId].familyName;
+    this.balanceRef.current.value = this.state.clientsCatalog[this.props.clientId].balance;
+  };
+
   render() {
     console.log("Card render");
-
+    
     return (
       <div>
         <span>Фамилия</span>
@@ -49,7 +56,13 @@ class Card extends React.PureComponent {
         <input type="number" ref={this.balanceRef}></input>
         <br />
         <button onClick={this.clickSave}>Сохранить</button>
-        <button onClick = {() => {buttonClick.emit("EButtonCencel")}}>Отмена</button>
+        <button
+          onClick={() => {
+            buttonClick.emit("EButtonCencel");
+          }}
+        >
+          Отмена
+        </button>
       </div>
     );
   }
