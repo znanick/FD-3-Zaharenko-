@@ -7,24 +7,27 @@ import { buttonClick } from "./events";
 
 class Client extends React.PureComponent {
   state = {
-    info: this.props.clientInfo,
+    
   };
 
+
+
   render() {
-    console.log("Mobile client " + this.state.info.key + " render");
+    console.log("Mobile client " + this.props.clientInfo.key + " render");
+    
     var statusColor =
-      parseFloat(this.state.info.balance) <= 0 ? "red" : "green";
+      parseFloat(this.props.clientInfo.balance) <= 0 ? "#f44336" : "#4CAF50";
     return (
       <tr>
-        <td>{this.state.info.surname}</td>
-        <td>{this.state.info.name}</td>
-        <td>{this.state.info.familyName}</td>
-        <td>{this.state.info.balance}</td>
+        <td>{this.props.clientInfo.surname}</td>
+        <td>{this.props.clientInfo.name}</td>
+        <td>{this.props.clientInfo.familyName}</td>
+        <td>{this.props.clientInfo.balance}</td>
         <td style={{ backgroundColor: statusColor }}></td>
         <td>
           <button
             onClick={() => {
-              buttonClick.emit("EEditClient");
+              buttonClick.emit("EEditClient", this.props.clientInfo.key);
             }}
           >
             Редактировать
@@ -33,7 +36,7 @@ class Client extends React.PureComponent {
         <td>
           <button
             onClick={() => {
-              buttonClick.emit("ERemoveClient", this.state.key);
+              buttonClick.emit("ERemoveClient", this.props.clientInfo.key);
             }}
           >
             Удалить

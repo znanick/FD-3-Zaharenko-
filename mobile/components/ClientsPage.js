@@ -16,7 +16,8 @@ class ClientsPage extends React.PureComponent {
     companyCatalog: this.props.companyList,
     choosenCompany: 0,
     choosenClientId: null,
-    cardMode: 0, // 0 - nothing  1 - add new client  2 - change client
+    cardMode: 0, // 0 - nothing  1 - add new client  2 - edit client
+    viewMode: 0, // 0 - all  1 - active clients  2 - blocked clients
   };
 
   changeCompany = (index) => {
@@ -27,12 +28,16 @@ class ClientsPage extends React.PureComponent {
     buttonClick.addListener("EAddNewClient", this.addNewClient);
     buttonClick.addListener("ERemoveClient", this.removeClient);
     buttonClick.addListener("EEditClient", this.editClient);
+    buttonClick.addListener("EButtonSave", this.buttonSave);
+    buttonClick.addListener("EButtonCencel", this.buttonCencel);
   };
 
   componentWillUnmount = () => {
     buttonClick.removeListener("EAddNewClient", this.addNewClient);
     buttonClick.removeListener("ERemoveClient", this.removeClient);
     buttonClick.removeListener("EEditClient", this.editClient);
+    buttonClick.removeListener("EButtonSave", this.buttonSave);
+    buttonClick.removeListener("EButtonCencel", this.buttonCencel);
   };
 
   addNewClient = () => {
@@ -40,18 +45,64 @@ class ClientsPage extends React.PureComponent {
   };
 
   removeClient = (clientKey) => {
-    var oldCatalog = Immutable.Map(this.state.clientsCatalog);
-    
+    var oldCatalog = [...this.state.clientsCatalog];
+
     if (confirm("Вы уверены?")) {
       var newCatalog = oldCatalog.filter((el) => el.key != clientKey);
       this.setState({ clientsCatalog: newCatalog });
     }
   };
 
-  editClient = () => {};
+  editClient = (id) => {
+    this.setState({ cardMode: 2, choosenClientId: id });
+  };
+
+  buttonSave = (newClientInfo) => {
+    if (this.state.cardMode == 1) {
+      let id = 0;
+      for (var a = 0; a < this.state.clientsCatalog.length; a++) {
+        id = parseFloat(this.state.clientsCatalog[a].key);
+      }
+      id = id + 1;
+      newClientInfo.key = id;
+
+      let newClientsCatalog = [...this.state.clientsCatalog];
+      newClientsCatalog.push(newClientInfo);
+
+      this.setState({ cardMode: 0, clientsCatalog: newClientsCatalog });
+    } else if (this.state.cardMode == 2) {
+      let oldCatalog = [...this.state.clientsCatalog];
+      var newCatalog = [];
+      oldCatalog.forEach((item, key) => {
+        if (item.key == newClientInfo.key) {
+          newCatalog.push(newClientInfo);
+        } else {
+          newCatalog.push(item);
+        }
+      });
+
+      this.setState({ cardMode: 0, clientsCatalog: newCatalog });
+    }
+  };
+
+  buttonCencel = () => {
+    this.setState({ cardMode: 0 });
+  };
+
+  viewAll = () => {
+    console.log("dsf");
+    this.setState({ viewMode: 0 });
+  };
+  viewActive = () => {
+    this.setState({ viewMode: 1 });
+  };
+  viewBlocked = () => {
+    this.setState({ viewMode: 2 });
+  };
 
   render() {
     console.log("ClientPage render");
+
     var companyCode = [];
     this.state.companyCatalog.forEach((company, index) => {
       var butt = (
@@ -69,13 +120,37 @@ class ClientsPage extends React.PureComponent {
 
     var clientCode = [];
     for (var a = 0; a < this.state.clientsCatalog.length; a++) {
-      var clientComponent = (
-        <Client
-          key={this.state.clientsCatalog[a].key}
-          clientInfo={this.state.clientsCatalog[a]}
-        ></Client>
-      );
-      clientCode.push(clientComponent);
+      if (
+        this.state.viewMode == 1 &&
+        parseFloat(this.state.clientsCatalog[a].balance) > 0
+      ) {
+        var clientComponent = (
+          <Client
+            key={this.state.clientsCatalog[a].key}
+            clientInfo={this.state.clientsCatalog[a]}
+          ></Client>
+        );
+        clientCode.push(clientComponent);
+      } else if (
+        this.state.viewMode == 2 &&
+        parseFloat(this.state.clientsCatalog[a].balance) < 0
+      ) {
+        var clientComponent = (
+          <Client
+            key={this.state.clientsCatalog[a].key}
+            clientInfo={this.state.clientsCatalog[a]}
+          ></Client>
+        );
+        clientCode.push(clientComponent);
+      } else if (this.state.viewMode == 0) {
+        var clientComponent = (
+          <Client
+            key={this.state.clientsCatalog[a].key}
+            clientInfo={this.state.clientsCatalog[a]}
+          ></Client>
+        );
+        clientCode.push(clientComponent);
+      }
     }
 
     var cardCode =
@@ -95,6 +170,10 @@ class ClientsPage extends React.PureComponent {
         ></Card>
       );
 
+    var buttonAllColor = this.state.viewMode == 0 ? "#4CAF50" : "#008CBA";
+    var buttonActiveColor = this.state.viewMode == 1 ? "#4CAF50" : "#008CBA";
+    var buttonBlockedColor = this.state.viewMode == 2 ? "#4CAF50" : "#008CBA";
+
     return (
       <div className="pageContainer">
         <div className="companyContainer">
@@ -107,9 +186,24 @@ class ClientsPage extends React.PureComponent {
         <hr />
 
         <div className="buttonsContainer">
-          <button>Все</button>
-          <button>Активные</button>
-          <button>Заблокированные</button>
+          <button
+            style={{ backgroundColor:  buttonAllColor  }}
+            onClick={this.viewAll}
+          >
+            Все
+          </button>
+          <button
+            style={{ backgroundColor:  buttonActiveColor  }}
+            onClick={this.viewActive}
+          >
+            Активные
+          </button>
+          <button
+            style={{ backgroundColor:  buttonBlockedColor  }}
+            onClick={this.viewBlocked}
+          >
+            Заблокированные
+          </button>
         </div>
 
         <hr />

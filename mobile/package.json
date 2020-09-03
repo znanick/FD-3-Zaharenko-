@@ -23,8 +23,8 @@
   "dependencies": {
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-event-emitter": "^0.2.1"
   }
 }

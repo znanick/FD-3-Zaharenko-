@@ -1,2 +1,28 @@
+.pageContainer {
+  width: 80%;
+  margin: auto;
+}
+.tableContainer {
+  width: 100%;
+}
+table {
+  border-collapse: collapse;
+  margin: auto;
+  width: 100%;
+}
+tr,
+td {
+  padding: 5px 15px;
+  border-bottom: 1px solid grey;
+  height: 10px;
+  text-align: center;
+}
+.tableHead {
+  font-weight: 700;
+}
+span,
+input {
+  margin: 2px;
+}
 
 /*# sourceMappingURL=bundle.css.map*/
